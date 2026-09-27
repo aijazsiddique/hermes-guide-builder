@@ -1,0 +1,25 @@
+{
+  "interface": {
+    "displayName": "Hermes Guide Builder",
+    "shortDescription": "Build verified A-to-Z Hermes project guides",
+    "longDescription": "Interview the user deeply, verify current official Hermes Agent capabilities, and generate a polished standalone HTML implementation guide with copyable prompts, testing instructions, notes, and persistent Run/Tested/Complete progress.",
+    "developerName": "Aijaz Siddique",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive"
+    ],
+    "defaultPrompt": [
+      "I want to build a Hermes Agent project. Interview me and create the A-to-Z HTML build guide.",
+      "Create a Hermes build guide for this project, but verify Hermes documentation before designing anything.",
+      "Review my Hermes project idea and start the deep requirements interview."
+    ]
+  },
+  "name": "hermes-guide-builder",
+  "version": "0.1.0",
+  "description": "Create documentation-grounded, step-by-step Hermes Agent project build guides as resumable standalone HTML files.",
+  "author": {
+    "name": "Aijaz Siddique"
+  },
+  "keywords": [],
+  "skills": "./skills"
+}
