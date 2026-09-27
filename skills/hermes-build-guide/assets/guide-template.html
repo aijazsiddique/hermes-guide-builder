@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{PROJECT_TITLE}} — Hermes Build Guide</title>
+<style>
+:root{--bg:#f5f7fb;--panel:#fff;--text:#18202b;--muted:#687386;--line:#dfe5ec;--accent:#314b7c;--accent2:#eaf0fb;--ok:#1f7a4f;--warn:#9a6500;--shadow:0 10px 30px rgba(22,32,48,.07);--r:16px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55}.shell{max-width:1180px;margin:auto;padding:28px}.hero{background:linear-gradient(135deg,#fff,#eef3fb);border:1px solid var(--line);border-radius:24px;padding:34px;box-shadow:var(--shadow)}h1{font-size:clamp(30px,5vw,52px);line-height:1.05;margin:0 0 12px}h2{margin-top:34px}p{margin:8px 0}.muted{color:var(--muted)}.progress-wrap{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;margin-top:24px}.bar{height:12px;background:#dde4ef;border-radius:99px;overflow:hidden}.bar>span{display:block;height:100%;width:0;background:var(--accent);transition:.2s}.toolbar{position:sticky;top:0;z-index:9;margin:18px 0;padding:12px;background:rgba(245,247,251,.92);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 13px;border-radius:10px;font-weight:650;cursor:pointer}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.panel,.step{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:22px}.step{margin:18px 0;scroll-margin-top:90px}.step-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.step-num{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}.step h3{font-size:24px;margin:3px 0 4px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:var(--accent2);padding:5px 9px;border-radius:8px;font-size:13px}.prompt{position:relative;background:#111827;color:#edf3ff;border-radius:14px;padding:18px;margin:14px 0;white-space:pre-wrap;overflow:auto}.copy{position:absolute;right:10px;top:10px}.states{display:flex;gap:12px;flex-wrap:wrap;padding:12px 0}.state{display:flex;align-items:center;gap:6px;font-weight:700}.state input{width:18px;height:18px}.notes{width:100%;min-height:92px;border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit;resize:vertical}.callout{border-left:4px solid var(--accent);background:var(--accent2);padding:12px 14px;border-radius:8px}.ledger{width:100%;border-collapse:collapse;font-size:14px}.ledger th,.ledger td{border-bottom:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}.done{border-color:#b9dfc9}.done .step-num{color:var(--ok)}.storage{font-size:13px;color:var(--muted)}@media(max-width:760px){.shell{padding:14px}.grid{grid-template-columns:1fr}.hero{padding:22px}.step-head{display:block}.progress-wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell" data-guide-id="{{GUIDE_ID}}">
+  <header class="hero">
+    <div class="step-num">Hermes Agent Project Guide</div>
+    <h1>{{PROJECT_TITLE}}</h1>
+    <p>{{PROJECT_SUMMARY}}</p>
+    <div class="progress-wrap"><div class="bar"><span id="progressBar"></span></div><strong id="progressText">0 / 0 complete</strong></div>
+    <p class="muted" id="lastTouched">No progress recorded yet.</p>
+  </header>
+
+  <nav class="toolbar">
+    <button class="btn primary" id="continueBtn">Continue</button>
+    <button class="btn" id="exportBtn">Export Progress</button>
+    <label class="btn" for="importFile">Import Progress</label><input id="importFile" type="file" accept="application/json" hidden>
+    <button class="btn" id="resetBtn">Reset Progress</button>
+  </nav>
+
+  <section class="panel">
+    <h2>How to use this guide</h2>
+    <p>Run one Hermes prompt at a time. Mark <strong>Run</strong> only after you actually execute it in Hermes, <strong>Tested</strong> after verification, and <strong>Complete</strong> only when the step is accepted.</p>
+    <p class="storage">Progress and notes are saved in this browser using localStorage. Browser/file-origin policies can vary, so export progress periodically if the record matters.</p>
+  </section>
+
+  <!-- Replace the sample sections below with the generated project overview, capability ledger, requirements, architecture, prerequisites, and build steps. -->
+  <section class="grid">
+    <article class="panel"><h2>Project overview</h2><p>{{PROJECT_OVERVIEW}}</p></article>
+    <article class="panel"><h2>Success criteria</h2><p>{{SUCCESS_CRITERIA}}</p></article>
+  </section>
+
+  <section class="panel">
+    <h2>Verified Hermes capability ledger</h2>
+    <table class="ledger"><thead><tr><th>Capability</th><th>Status</th><th>Official evidence</th><th>Use in this guide</th></tr></thead><tbody>{{CAPABILITY_ROWS}}</tbody></table>
+  </section>
+
+  <main id="steps">
+    <article class="step" id="step-01" data-step-id="01">
+      <div class="step-head"><div><div class="step-num">Step 01</div><h3>{{STEP_TITLE}}</h3><p class="muted">{{STEP_OBJECTIVE}}</p></div></div>
+      <div class="chips"><span class="chip">Prerequisite: {{STEP_PREREQUISITE}}</span></div>
+      <h4>Hermes prompt</h4>
+      <div class="prompt"><button class="btn copy" data-action="copyPrompt">Copy Prompt</button><code>{{HERMES_PROMPT}}</code></div>
+      <h4>Expected result</h4><p>{{EXPECTED_RESULT}}</p>
+      <h4>How to test</h4><p>{{TEST_INSTRUCTIONS}}</p>
+      <div class="states">
+        <label class="state"><input type="checkbox" data-status="run"> Run</label>
+        <label class="state"><input type="checkbox" data-status="tested"> Tested</label>
+        <label class="state"><input type="checkbox" data-status="complete"> Complete</label>
+      </div>
+      <label><strong>Notes</strong><textarea class="notes" data-notes placeholder="What happened, blockers, fixes, commands, or observations..."></textarea></label>
+    </article>
+  </main>
+
+  <section class="panel"><h2>End-to-end acceptance tests</h2><div>{{END_TO_END_TESTS}}</div></section>
+  <section class="panel"><h2>Production / run procedure</h2><div>{{PRODUCTION_RUN}}</div></section>
+  <section class="panel"><h2>Troubleshooting & recovery</h2><div>{{TROUBLESHOOTING}}</div></section>
+  <section class="panel"><h2>Final completion checklist</h2><div>{{FINAL_CHECKLIST}}</div></section>
+</div>
+<script>
+(()=>{
+  const root=document.querySelector('[data-guide-id]');
+  const guideId=root.dataset.guideId||'hermes-guide';
+  const storageKey='hermes-guide-progress:'+guideId;
+  const steps=[...document.querySelectorAll('.step')];
+  const blank=()=>({version:1,guideId,steps:{},lastTouched:null,updatedAt:null});
+  let progress=loadProgress();
+
+  function loadProgress(){
+    try{const raw=localStorage.getItem(storageKey);return raw?{...blank(),...JSON.parse(raw)}:blank()}catch(e){return blank()}
+  }
+  function saveProgress(){progress.updatedAt=new Date().toISOString();localStorage.setItem(storageKey,JSON.stringify(progress));renderSummary()}
+  function getStepState(id){return progress.steps[id]||(progress.steps[id]={run:false,tested:false,complete:false,notes:''})}
+  function normalizeStatus(state,status,checked){
+    state[status]=checked;
+    if(status==='complete' && checked){state.run=true;state.tested=true}
+    if(status==='run' && !checked){state.tested=false;state.complete=false}
+    if(status==='tested' && checked){state.run=true}
+    if(status==='tested' && !checked){state.complete=false}
+    return state;
+  }
+  function touch(id){progress.lastTouched={stepId:id,at:new Date().toISOString()}}
+  function hydrate(){
+    steps.forEach(step=>{
+      const id=step.dataset.stepId,s=getStepState(id);
+      step.querySelectorAll('[data-status]').forEach(cb=>cb.checked=!!s[cb.dataset.status]);
+      const notes=step.querySelector('[data-notes]'); if(notes) notes.value=s.notes||'';
+      step.classList.toggle('done',!!s.complete);
+    });
+    renderSummary();
+  }
+  function renderSummary(){
+    const total=steps.length, completed=steps.filter(s=>getStepState(s.dataset.stepId).complete).length;
+    document.getElementById('progressText').textContent=`${completed} / ${total} complete`;
+    document.getElementById('progressBar').style.width=total?`${Math.round(completed/total*100)}%`:'0%';
+    const last=document.getElementById('lastTouched');
+    last.textContent=progress.lastTouched?`Last touched: Step ${progress.lastTouched.stepId} · ${new Date(progress.lastTouched.at).toLocaleString()}`:'No progress recorded yet.';
+    steps.forEach(step=>step.classList.toggle('done',!!getStepState(step.dataset.stepId).complete));
+  }
+  function nextStep(){return steps.find(s=>!getStepState(s.dataset.stepId).complete)||steps[steps.length-1]}
+  function copyPrompt(button){
+    const code=button.closest('.prompt').querySelector('code').innerText;
+    if(navigator.clipboard&&window.isSecureContext){return navigator.clipboard.writeText(code)}
+    const ta=document.createElement('textarea');ta.value=code;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();return Promise.resolve();
+  }
+  function exportProgress(){
+    const payload=JSON.stringify({type:'hermes-guide-progress',guideId,exportedAt:new Date().toISOString(),progress},null,2);
+    const blob=new Blob([payload],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=`${guideId}-progress.json`;a.click();URL.revokeObjectURL(url);
+  }
+  async function importProgress(file){
+    const data=JSON.parse(await file.text());
+    if(data.type!=='hermes-guide-progress'||data.guideId!==guideId)throw new Error('This progress file belongs to a different guide.');
+    progress={...blank(),...data.progress,guideId};saveProgress();hydrate();
+  }
+
+  root.addEventListener('change',e=>{
+    const cb=e.target.closest('[data-status]'); if(!cb)return;
+    const step=cb.closest('.step'),id=step.dataset.stepId,state=getStepState(id),status=cb.dataset.status,checked=cb.checked;
+    normalizeStatus(state,status,checked);touch(id);saveProgress();hydrate();
+  });
+  root.addEventListener('input',e=>{
+    if(!e.target.matches('[data-notes]'))return;
+    const step=e.target.closest('.step'),id=step.dataset.stepId;getStepState(id).notes=e.target.value;touch(id);saveProgress();
+  });
+  root.addEventListener('click',e=>{
+    const copy=e.target.closest('[data-action="copyPrompt"]');
+    if(copy){copyPrompt(copy).then(()=>{const old=copy.textContent;copy.textContent='Copied';setTimeout(()=>copy.textContent=old,1000)});return}
+  });
+  document.getElementById('continueBtn').addEventListener('click',()=>nextStep()?.scrollIntoView({behavior:'smooth',block:'start'}));
+  document.getElementById('exportBtn').addEventListener('click',exportProgress);
+  document.getElementById('importFile').addEventListener('change',async e=>{try{if(e.target.files[0])await importProgress(e.target.files[0])}catch(err){alert(err.message)}finally{e.target.value=''}});
+  document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('Reset all saved status and notes for this guide?')){progress=blank();localStorage.removeItem(storageKey);hydrate()}});
+  hydrate();
+})();
+</script>
+</body>
+</html>
