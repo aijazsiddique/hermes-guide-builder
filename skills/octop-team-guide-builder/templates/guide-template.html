@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#687086;--line:#dfe4ee;--accent:#315efb;--ok:#137a4b;--warn:#9a6700;--code:#101522}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--accent)}.wrap{max-width:1180px;margin:auto;padding:28px 18px 80px}.hero,.panel,.step{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(20,30,55,.05)}.hero{padding:28px;margin-bottom:18px}.hero h1{margin:.1rem 0 .5rem;font-size:clamp(1.8rem,4vw,3rem)}.muted{color:var(--muted)}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{appearance:none;border:1px solid var(--line);background:#fff;color:var(--text);border-radius:9px;padding:9px 12px;font-weight:650;cursor:pointer}.btn.primary{background:var(--accent);color:white;border-color:var(--accent)}.progress-shell{height:10px;background:#edf0f6;border-radius:999px;overflow:hidden;margin-top:12px}.progress-bar{height:100%;width:0;background:var(--accent);transition:width .2s}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0}.panel{padding:20px;margin:14px 0}.panel h2,.step h3{margin-top:0}.ledger{width:100%;border-collapse:collapse;font-size:14px}.ledger th,.ledger td{border-bottom:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}.steps{display:grid;gap:16px;margin-top:18px}.step{padding:22px;scroll-margin-top:16px}.step.done{outline:2px solid rgba(19,122,75,.18)}.step-num{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--accent);text-transform:uppercase}.chips{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.chip{font-size:12px;border:1px solid var(--line);background:#f8f9fc;padding:4px 8px;border-radius:999px}.prompt{position:relative;background:var(--code);color:#eef3ff;border-radius:12px;padding:48px 16px 16px;overflow:auto}.prompt code{white-space:pre-wrap;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.prompt .copy{position:absolute;right:10px;top:10px}.states{display:flex;gap:16px;flex-wrap:wrap;margin:16px 0}.state{font-weight:650}.notes{width:100%;min-height:86px;margin-top:7px;border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit;resize:vertical}.checklist li{margin:.35rem 0}.warn{border-left:4px solid #e0a000;padding-left:12px}.good{color:var(--ok);font-weight:700}@media(max-width:640px){.wrap{padding:14px 10px 50px}.hero,.panel,.step{border-radius:12px}.ledger{display:block;overflow-x:auto}}
+</style>
+</head>
+<body>
+<main class="wrap" data-guide-id="{{GUIDE_ID}}">
+<section class="hero">
+<div class="step-num">Octop Team Build Guide</div>
+<h1>{{TITLE}}</h1>
+<p>{{OUTCOME_SHORT}}</p>
+<p class="muted">Audited: {{AUDITED_AT}} · Repo: {{REPO_REF}}</p>
+<div class="toolbar">
+<button class="btn primary" id="continueBtn">Continue</button>
+<button class="btn" id="exportBtn">Export Progress</button>
+<label class="btn">Import Progress<input id="importFile" type="file" accept="application/json" hidden></label>
+<button class="btn" id="resetBtn">Reset Progress</button>
+</div>
+<div class="progress-shell"><div class="progress-bar" id="progressBar"></div></div>
+<p class="muted"><span id="progressText">0 / 0 complete</span> · <span id="lastTouched">No progress recorded yet.</span></p>
+</section>
+
+<section class="grid">
+<article class="panel"><h2>Outcome</h2>{{OUTCOME_HTML}}</article>
+<article class="panel"><h2>Success criteria</h2>{{SUCCESS_CRITERIA_HTML}}</article>
+</section>
+
+<section class="panel"><h2>Verified Octop capability ledger</h2>{{CAPABILITY_LEDGER_HTML}}</section>
+<section class="panel"><h2>Topology decision</h2>{{TOPOLOGY_HTML}}</section>
+<section class="panel"><h2>Agent roster & authority</h2>{{ROSTER_HTML}}</section>
+<section class="panel"><h2>State & handoff contracts</h2>{{STATE_HANDOFF_HTML}}</section>
+<section class="panel"><h2>Acceptance matrix</h2>{{ACCEPTANCE_MATRIX_HTML}}</section>
+
+<section class="steps" id="steps">
+{{STEPS_HTML}}
+<!-- Each generated step should use this shape:
+<article class="step" id="step-01" data-step-id="01">
+  <div class="step-num">Step 01</div><h3>Title</h3>
+  <div class="chips"><span class="chip">Prerequisite: none</span></div>
+  <h4>Octop Main-Agent Prompt</h4>
+  <div class="prompt"><button class="btn copy" data-action="copyPrompt">Copy Prompt</button><code>...</code></div>
+  <h4>Expected result</h4><p>...</p>
+  <h4>How to test</h4><p>...</p>
+  <div class="states">
+    <label class="state"><input type="checkbox" data-status="run"> Run</label>
+    <label class="state"><input type="checkbox" data-status="tested"> Tested</label>
+    <label class="state"><input type="checkbox" data-status="complete"> Complete</label>
+  </div>
+  <label><strong>Notes</strong><textarea class="notes" data-notes placeholder="Results, blockers, IDs, fixes, observations..."></textarea></label>
+</article>
+-->
+</section>
+
+<section class="panel"><h2>Final production-readiness checklist</h2>{{FINAL_CHECKLIST_HTML}}</section>
+<section class="panel"><h2>Sources</h2>{{SOURCES_HTML}}</section>
+</main>
+<script>
+(()=>{
+const root=document.querySelector('[data-guide-id]'),guideId=root.dataset.guideId||'octop-team-guide',storageKey='octop-team-guide-progress:'+guideId,steps=[...document.querySelectorAll('.step')];
+const blank=()=>({version:1,guideId,steps:{},lastTouched:null,updatedAt:null});
+let progress=load();
+function load(){try{const raw=localStorage.getItem(storageKey);return raw?{...blank(),...JSON.parse(raw)}:blank()}catch(e){return blank()}}
+function save(){progress.updatedAt=new Date().toISOString();localStorage.setItem(storageKey,JSON.stringify(progress));summary()}
+function st(id){return progress.steps[id]||(progress.steps[id]={run:false,tested:false,complete:false,notes:''})}
+function norm(s,k,v){s[k]=v;if(k==='complete'&&v){s.run=true;s.tested=true}if(k==='run'&&!v){s.tested=false;s.complete=false}if(k==='tested'&&v)s.run=true;if(k==='tested'&&!v)s.complete=false}
+function touch(id){progress.lastTouched={stepId:id,at:new Date().toISOString()}}
+function hydrate(){steps.forEach(step=>{const id=step.dataset.stepId,s=st(id);step.querySelectorAll('[data-status]').forEach(cb=>cb.checked=!!s[cb.dataset.status]);const n=step.querySelector('[data-notes]');if(n)n.value=s.notes||'';step.classList.toggle('done',!!s.complete)});summary()}
+function summary(){const total=steps.length,completed=steps.filter(s=>st(s.dataset.stepId).complete).length;document.getElementById('progressText').textContent=`${completed} / ${total} complete`;document.getElementById('progressBar').style.width=total?`${Math.round(completed/total*100)}%`:'0%';document.getElementById('lastTouched').textContent=progress.lastTouched?`Last touched: Step ${progress.lastTouched.stepId} · ${new Date(progress.lastTouched.at).toLocaleString()}`:'No progress recorded yet.'}
+function next(){return steps.find(s=>!st(s.dataset.stepId).complete)||steps[steps.length-1]}
+async function copy(btn){const txt=btn.closest('.prompt').querySelector('code').innerText;if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(txt);const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}
+function exp(){const payload=JSON.stringify({type:'octop-team-guide-progress',guideId,exportedAt:new Date().toISOString(),progress},null,2),blob=new Blob([payload],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=guideId+'-progress.json';a.click();URL.revokeObjectURL(url)}
+async function imp(file){const data=JSON.parse(await file.text());if(data.type!=='octop-team-guide-progress'||data.guideId!==guideId)throw new Error('This progress file belongs to a different Octop guide.');progress={...blank(),...data.progress,guideId};save();hydrate()}
+root.addEventListener('change',e=>{const cb=e.target.closest('[data-status]');if(!cb)return;const step=cb.closest('.step'),id=step.dataset.stepId,s=st(id);norm(s,cb.dataset.status,cb.checked);touch(id);save();hydrate()});
+root.addEventListener('input',e=>{if(!e.target.matches('[data-notes]'))return;const step=e.target.closest('.step'),id=step.dataset.stepId;st(id).notes=e.target.value;touch(id);save()});
+root.addEventListener('click',e=>{const b=e.target.closest('[data-action="copyPrompt"]');if(!b)return;copy(b).then(()=>{const old=b.textContent;b.textContent='Copied';setTimeout(()=>b.textContent=old,900)})});
+document.getElementById('continueBtn').addEventListener('click',()=>next()?.scrollIntoView({behavior:'smooth',block:'start'}));
+document.getElementById('exportBtn').addEventListener('click',exp);
+document.getElementById('importFile').addEventListener('change',async e=>{try{if(e.target.files[0])await imp(e.target.files[0])}catch(err){alert(err.message)}finally{e.target.value=''}});
+document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('Reset all saved status and notes for this guide?')){progress=blank();localStorage.removeItem(storageKey);hydrate()}});
+hydrate();
+})();
+</script>
+</body>
+</html>
